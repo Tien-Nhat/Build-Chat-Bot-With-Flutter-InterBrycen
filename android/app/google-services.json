@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "355737236784",
+    "project_id": "chatapp-748fe",
+    "storage_bucket": "chatapp-748fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355737236784:android:6f4c7a302610deb2cf04f5",
+        "android_client_info": {
+          "package_name": "com.example.chatgptbrycen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355737236784-6jkcikm6l477c08raptk243g0g1r64di.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw6VyyIkCJnowIqmkKkmkhmBw7zp9HvGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355737236784-6jkcikm6l477c08raptk243g0g1r64di.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "355737236784-a3vkmeeuja2qrvoj6atgud95ccpnahal.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chatgptbrycen"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355737236784:android:3930c34c2e9c95efcf04f5",
+        "android_client_info": {
+          "package_name": "com.example.chatgptnhat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355737236784-6jkcikm6l477c08raptk243g0g1r64di.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw6VyyIkCJnowIqmkKkmkhmBw7zp9HvGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355737236784-6jkcikm6l477c08raptk243g0g1r64di.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "355737236784-a3vkmeeuja2qrvoj6atgud95ccpnahal.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chatgptbrycen"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355737236784:android:f70af204b6513cdecf04f5",
+        "android_client_info": {
+          "package_name": "com.example.gptbrycen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355737236784-6jkcikm6l477c08raptk243g0g1r64di.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw6VyyIkCJnowIqmkKkmkhmBw7zp9HvGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355737236784-6jkcikm6l477c08raptk243g0g1r64di.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "355737236784-a3vkmeeuja2qrvoj6atgud95ccpnahal.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chatgptbrycen"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
