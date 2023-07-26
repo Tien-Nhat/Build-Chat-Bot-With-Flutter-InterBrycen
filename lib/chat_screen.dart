@@ -1,6 +1,6 @@
 import 'package:gptbrycen/widget/chat_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:dart_openai/dart_openai.dart';
@@ -13,14 +13,58 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  late stt.SpeechToText _speech;
+  bool _isListening = false;
+
   bool _isTyping = false;
   String _checkconnect = "true";
+  String? ResultSPeech;
+  void onListen() async {
+    var collection = FirebaseFirestore.instance.collection('memory');
+    var docSnapshot = await collection.doc('test1').get();
+    Map<String, dynamic> data = docSnapshot.data()!;
+    _checkconnect = data["CheckConnect"];
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+          onStatus: (val) {
+            print("OnStatus: $val");
+            if (val == "done") {
+              setState(() {
+                _isListening = false;
+                _speech.stop();
+              });
+            }
+          },
+          onError: (val) => print("error: $val"));
+      if (available) {
+        setState(() {
+          _isListening = true;
+        });
+        _speech.listen(
+            localeId: "vi_VN",
+            listenFor: Duration(days: 1),
+            onResult: (val) => setState(() {
+                  textEditingController.text = val.recognizedWords;
+                  if (_isTyping == true) {
+                    textEditingController.clear();
+                  }
+                }));
+      }
+    } else {
+      setState(() {
+        _isListening = false;
+        _speech.stop();
+      });
+    }
+  }
 
   late TextEditingController textEditingController;
+
   @override
   void initState() {
     textEditingController = TextEditingController();
     super.initState();
+    _speech = stt.SpeechToText();
   }
 
   @override
@@ -30,16 +74,23 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _submitMessage() async {
+    if (textEditingController.text.trim().isEmpty) {
+      return;
+    }
+    final enteredMessage = textEditingController.text;
+    if (_isListening) {
+      setState(() {
+        _isListening = false;
+        _speech.stop();
+      });
+    }
     _isTyping = true;
     var collection = FirebaseFirestore.instance.collection('memory');
     var docSnapshot = await collection.doc('test1').get();
     Map<String, dynamic> data = docSnapshot.data()!;
     _checkconnect = data["CheckConnect"];
     OpenAI.apiKey = data["APIKey"];
-    final enteredMessage = textEditingController.text;
-    if (enteredMessage.trim().isEmpty) {
-      return;
-    }
+
     FocusScope.of(context).unfocus();
 
     textEditingController.clear();
@@ -151,11 +202,20 @@ class _ChatScreenState extends State<ChatScreen> {
                             onSubmitted: (value) {
                               _submitMessage();
                             },
+                            maxLines: null,
                             decoration: const InputDecoration.collapsed(
                                 hintText: "Nhập text ở đây",
                                 hintStyle: TextStyle(color: Colors.grey)),
                           ),
                         ),
+                        IconButton(
+                            onPressed: () => onListen(),
+                            icon: Icon(
+                              _isListening ? Icons.mic : Icons.mic_off,
+                              color: _isListening
+                                  ? Colors.lightBlue
+                                  : Colors.white,
+                            )),
                         IconButton(
                             onPressed: _submitMessage,
                             icon: const Icon(

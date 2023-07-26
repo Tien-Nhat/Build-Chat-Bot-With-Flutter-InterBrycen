@@ -1,10 +1,23 @@
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:gptbrycen/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class ChatWidget extends StatelessWidget {
-  const ChatWidget({super.key, required this.msg, required this.chatIndext});
+  ChatWidget({super.key, required this.msg, required this.chatIndext});
   final String msg;
+  FlutterTts flutterTts = FlutterTts();
   final int chatIndext;
+  bool _isSpeaking = false;
+
+  void _speak() async {
+    _isSpeaking = !_isSpeaking;
+    if (_isSpeaking) {
+      await flutterTts.speak(msg);
+    } else {
+      flutterTts.stop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +42,14 @@ class ChatWidget extends StatelessWidget {
                 Expanded(
                     child: TextWidget(
                   label: msg,
-                ))
+                )),
+                if (chatIndext == 1)
+                  IconButton(
+                    onPressed: _speak,
+                    icon:
+                        Icon(_isSpeaking ? Icons.volume_mute : Icons.volume_up),
+                    color: Colors.white,
+                  )
               ],
             ),
           ),
