@@ -15,7 +15,6 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   late stt.SpeechToText _speech;
   bool _isListening = false;
-
   bool _isTyping = false;
   String _checkconnect = "true";
   String? ResultSPeech;
