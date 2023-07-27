@@ -54,7 +54,7 @@ Upload audio, text, or PDF files for quick summaries.
 
 ## Acknowledgements
 
-Hypebard was built using the following open-source libraries and tools:
+BrycenChat was built using the following open-source libraries and tools:
 
 * [Flutter](https://flutter.dev/)
 * [Dart](https://dart.dev/)
