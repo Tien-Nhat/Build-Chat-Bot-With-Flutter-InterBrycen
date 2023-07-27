@@ -24,7 +24,10 @@
 
 | Screenshot 1                                 | Screenshot 2                                 | Screenshot 3                                 |
 |----------------------------------------------|----------------------------------------------|----------------------------------------------|
-| ![Home UI](https://cdn1.lhmanga.com/Store/Manga/ChatScreen_64c1d5509ca44.jpg) | ![Chat UI](screenshots/screenshot2.png) | ![Customize API](screenshots/screenshot3.png) |
+| ![Home UI](![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/76903e14-0103-4a6f-98f0-919aa9f8c808)
+) | ![Chat UI](![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/5e29dfe6-ad24-4912-9fc7-0012ed64d439)
+) | ![Customize API](![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/ed63b94e-1a0b-4b72-8be1-e696a8cc4c5d)
+) |
 
 ## Installation
 
