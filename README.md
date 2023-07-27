@@ -24,7 +24,9 @@
 
 | Screenshot 1                                 | Screenshot 2                                 | Screenshot 3                                 |
 |----------------------------------------------|----------------------------------------------|----------------------------------------------|
-|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/377350f1-ec10-4286-b231-ee62f5e73b39)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/86816061-87e9-4226-b0e0-626eb47f3426)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/a533f47a-8674-44c4-acf9-0f4e16772630)|
+|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/377350f1-ec10-4286-b231-ee62f5e73b39)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/abf879f7-b21b-4b33-aeca-29a43a38480c)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/8f011694-5590-4103-b7c7-a884291085e3)|
+
+
 
 
 
