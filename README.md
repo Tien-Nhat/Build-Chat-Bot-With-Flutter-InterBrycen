@@ -4,7 +4,8 @@
 <div style="display: flex;">
   <div style="flex: 1;">
     <a href="https://app.daily.dev/somrit">
-      <img src="https://api.daily.dev/devcards/da71dd31134c42e488c5f8afd3548e65.png?r=sk9" width="150" alt="Somrit Dasgupta's Dev Card"/>
+      <img src=![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/bf31083d-52a7-453b-b764-877a30c9b9f8)
+ width="150" alt="Somrit Dasgupta's Dev Card"/>
     </a>
   </div>
   
