@@ -10,15 +10,14 @@
   </div>
   
   <div style="flex: 2;">
-    <p>Hypebard is an AI-powered writing assistant that makes writing easier and more enjoyable than ever before. Built using Flutter and written in Dart, Hypebard uses OpenAI's GPT technology to provide you with natural language processing capabilities that are second to none.</p>
+    <p>Meet BrycenChat - the Dart-powered chatbot app that revolutionizes how you communicate. Enjoy natural conversations and personalized responses, all while accessing quick information and concise summaries. Download now and experience the future of interactive chatbots!</p>
   </div>
 </div>
 
 ## Features
 
-* Advanced AI-powered writing assistance
-* Beautiful and intuitive UI
-* Support for all formatting: bold, italics, links, code blocks, and bullets
+* Chat with AI: Enjoy dynamic conversations with our AI chatbot, with Speech-to-Text and Text-to-Speech features.
+* Summarize Content: Extract key information from audio, text, and PDF files effortlessly.
 
 ## Screenshots
 
@@ -40,23 +39,18 @@ You can download the APK file from the releases section of this repository or bu
 instructions below:
 
 ```bash
-git clone https://github.com/somritdasgupta/hypebard.git
-cd hypebard
+git clone https://github.com/Shu-Kei/gptbrycen.git
+cd gptbrycen
 flutter build apk
 ````
 
 ## Usage
 
-To use Hypebard, simply type or dictate your text into the app, and the AI will provide you with natural language
-processing assistance. You can also format your text using the provided formatting options.
+Enter your ChatGPT API key to log in to the Chat Screen.
+Access the chatbot for interactive conversations.
+Switch to the "Summarize" screen to summarize content.
+Upload audio, text, or PDF files for quick summaries.
 
-## Contributing
-
-Contributions are welcome! Please read the [contribution guidelines](CONTRIBUTING.md) before getting started.
-
-## License
-
-Hypebard is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
