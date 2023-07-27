@@ -3,9 +3,9 @@
 
 <div style="display: flex;">
   <div style="flex: 1;">
-    <a href="https://app.daily.dev/somrit">
+    <a href="https://github.co/Shu-Keit">
       <img src="https://github.com/Shu-Kei/gptbrycen/assets/125178921/bf31083d-52a7-453b-b764-877a30c9b9f8"
- width="150" alt="Somrit Dasgupta's Dev Card"/>
+ width="150"/>
     </a>
   </div>
   
