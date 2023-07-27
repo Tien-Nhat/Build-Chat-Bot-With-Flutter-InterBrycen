@@ -1,4 +1,4 @@
-# hypeBard
+# BrycenChatApp
 
 
 <div style="display: flex;">
