@@ -5,7 +5,7 @@ ChatApp brycen.
 ## Getting Started
 
 Trò chuyện với chatgpt
-![alt text]([http://url/to/img.jpg](https://thpttranhungdao.edu.vn/wp-content/uploads/2022/11/Anh-Dep-Lam-Hinh-Nen.jpg))
+![alt text](https://thpttranhungdao.edu.vn/wp-content/uploads/2022/11/Anh-Dep-Lam-Hinh-Nen.jpg)
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
