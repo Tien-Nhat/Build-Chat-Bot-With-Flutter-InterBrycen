@@ -62,4 +62,9 @@ BrycenChat was built using the following open-source libraries and tools:
 * [Travis CI](https://travis-ci.org/)
 * [Google Fonts](https://fonts.google.com/)
 
+## Update
+*24/07/2023: Started developing the Chat app using Flutter Dart. Completed the initial version of the chat feature with AI integration. The app now allows users to chat with the AI-powered chatbot, providing dynamic and interactive conversations.
+
+*27/07/2023: Implemented essential updates to the app. Added the much-awaited Text-to-Speech and Speech-to-Text functionalities to enhance the chat with AI experience. Users can now use voice commands to communicate with the chatbot, making interactions more convenient and hands-free.
+
 
