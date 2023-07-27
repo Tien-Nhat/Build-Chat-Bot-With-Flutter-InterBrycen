@@ -1,6 +1,5 @@
 # hypeBard
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 <div style="display: flex;">
   <div style="flex: 1;">
