@@ -59,7 +59,6 @@ BrycenChat was built using the following open-source libraries and tools:
 * [Flutter](https://flutter.dev/)
 * [Dart](https://dart.dev/)
 * [OpenAI GPT](https://beta.openai.com/)
-* [Travis CI](https://travis-ci.org/)
 * [Google Fonts](https://fonts.google.com/)
 
 ## Update
