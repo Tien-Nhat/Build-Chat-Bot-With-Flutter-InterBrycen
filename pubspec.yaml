@@ -46,7 +46,10 @@ dependencies:
   avatar_glow: ^2.0.2
   dart_openai: ^3.0.0
   flutter_tts: ^3.7.0
-
+  markdown_widget: ^2.2.0
+  flutter_highlight: {version}
+  google_fonts: {version}
+  document_analysis: ^0.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -74,6 +77,22 @@ flutter:
     - assets/images/brycen.png
     - assets/images/chatgpt-logo.png
     - assets/images/human.png
+    - assets/images/java.png
+    - assets/images/python.png
+    - assets/images/ruby.png
+    - assets/images/rust.png
+    - assets/images/javascript.png
+    - assets/images/cpp.png
+    - assets/images/dart.png
+    - assets/images/html.png
+    - assets/images/c.png
+    - assets/images/php.png
+    - assets/images/lisp.png
+    - assets/images/pascal.png
+    - assets/images/objective.png
+    - assets/images/swift.png
+    
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
