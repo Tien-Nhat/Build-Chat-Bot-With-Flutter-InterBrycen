@@ -23,7 +23,8 @@
 
 | Screenshot 1                                 | Screenshot 2                                 | Screenshot 3                                 |
 |----------------------------------------------|----------------------------------------------|----------------------------------------------|
-|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/abf879f7-b21b-4b33-aeca-29a43a38480c)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/377350f1-ec10-4286-b231-ee62f5e73b39)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/8f011694-5590-4103-b7c7-a884291085e3)|
+|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/abf879f7-b21b-4b33-aeca-29a43a38480c)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/b53578fa-69fc-405f-b9bd-2dbfed853c32)
+|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/8f011694-5590-4103-b7c7-a884291085e3)|
 
 
 
@@ -67,4 +68,4 @@ BrycenChat was built using the following open-source libraries and tools:
 
 * 27/07/2023: Implemented essential updates to the app. Added the much-awaited Text-to-Speech and Speech-to-Text functionalities to enhance the chat with AI experience. Users can now use voice commands to communicate with the chatbot, making interactions more convenient and hands-free.Added content summarization with file upload from Android devices.
 
-
+*30/07/2023: Latest update brings a refreshed chat interface with added Markdown support for AI messages. Now, the AI can send messages in Markdown format for enhanced formatting options. Additionally, the chat now features a background Markdown code block, capable of detecting and displaying programming language syntax for a better coding experience.
