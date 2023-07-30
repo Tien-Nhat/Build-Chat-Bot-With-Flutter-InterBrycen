@@ -66,4 +66,4 @@ BrycenChat was built using the following open-source libraries and tools:
 
 * 27/07/2023: Implemented essential updates to the app. Added the much-awaited Text-to-Speech and Speech-to-Text functionalities to enhance the chat with AI experience. Users can now use voice commands to communicate with the chatbot, making interactions more convenient and hands-free.Added content summarization with file upload from Android devices.
 
-*30/07/2023: Latest update brings a refreshed chat interface with added Markdown support for AI messages. Now, the AI can send messages in Markdown format for enhanced formatting options. Additionally, the chat now features a background Markdown code block, capable of detecting and displaying programming language syntax for a better coding experience.
+* 30/07/2023: Latest update brings a refreshed chat interface with added Markdown support for AI messages. Now, the AI can send messages in Markdown format for enhanced formatting options. Additionally, the chat now features a background Markdown code block, capable of detecting and displaying programming language syntax for a better coding experience.
