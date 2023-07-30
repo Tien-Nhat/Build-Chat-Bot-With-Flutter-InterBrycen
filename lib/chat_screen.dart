@@ -41,7 +41,7 @@ class _ChatScreenState extends State<ChatScreen> {
         });
         _speech.listen(
             localeId: "vi_VN",
-            listenFor: Duration(days: 1),
+            listenFor: const Duration(days: 1),
             onResult: (val) => setState(() {
                   textEditingController.text = val.recognizedWords;
                   if (_isTyping == true) {
@@ -104,11 +104,16 @@ class _ChatScreenState extends State<ChatScreen> {
       model: "gpt-3.5-turbo",
       messages: [
         OpenAIChatCompletionChoiceMessageModel(
-          content: enteredMessage,
+          content: data["History"] + "\nHuman: " + enteredMessage + "\nAI:",
           role: OpenAIChatMessageRole.user,
         ),
       ],
     );
+    OpenAIEmbeddingsModel embeddings = await OpenAI.instance.embedding.create(
+      model: "text-embedding-ada-002",
+      input: data["History"],
+    );
+    print(embeddings);
     _isTyping = false;
     FirebaseFirestore.instance.collection("chat").add({
       "text": chatCompletion.choices[0].message.content,
@@ -156,9 +161,16 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             actions: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    FirebaseFirestore.instance
+                        .collection("memory")
+                        .doc("test1")
+                        .update({
+                      "test2": "false",
+                    });
+                  },
                   icon: const Icon(
-                    Icons.more_vert_rounded,
+                    Icons.exit_to_app,
                     color: Colors.white,
                   ))
             ],
