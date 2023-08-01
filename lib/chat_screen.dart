@@ -72,6 +72,23 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
+  String cutDialogue(String dialogue, {int maxLength = 9000}) {
+    if (dialogue.length <= maxLength) {
+      return dialogue;
+    } else {
+      // Tìm vị trí của ký tự xuống dòng gần nhất trước maxLength
+      int lastNewlineIndex =
+          dialogue.lastIndexOf("Human:", dialogue.length - maxLength);
+      if (lastNewlineIndex == -1) {
+        // print(dialogue.substring(0, maxLength));
+        return dialogue.substring(0, maxLength);
+      } else {
+        // Cắt phần đầu chuỗi từ ký tự xuống dòng gần nhất
+        return dialogue.substring(lastNewlineIndex - 1);
+      }
+    }
+  }
+
   void _submitMessage() async {
     if (textEditingController.text.trim().isEmpty) {
       return;
@@ -93,6 +110,7 @@ class _ChatScreenState extends State<ChatScreen> {
     FocusScope.of(context).unfocus();
 
     textEditingController.clear();
+
     FirebaseFirestore.instance.collection("chat").add({
       "text": enteredMessage,
       "createdAt": Timestamp.now(),
@@ -109,11 +127,11 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ],
     );
-    OpenAIEmbeddingsModel embeddings = await OpenAI.instance.embedding.create(
-      model: "text-embedding-ada-002",
-      input: data["History"],
-    );
-    print(embeddings);
+    // OpenAIEmbeddingsModel embeddings = await OpenAI.instance.embedding.create(
+    //   model: "text-embedding-ada-002",
+    //   input: data["History"],
+    // );
+
     _isTyping = false;
     FirebaseFirestore.instance.collection("chat").add({
       "text": chatCompletion.choices[0].message.content,
@@ -122,11 +140,8 @@ class _ChatScreenState extends State<ChatScreen> {
     });
 
     FirebaseFirestore.instance.collection("memory").doc("test1").update({
-      "History": data["History"] +
-          "\nHuman:" +
-          enteredMessage +
-          "\nAI:" +
-          chatCompletion.choices[0].message.content,
+      "History":
+          "${cutDialogue(data["History"])}\nHuman:$enteredMessage\nAI:${chatCompletion.choices[0].message.content}",
     });
   }
 
@@ -156,7 +171,7 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Image.asset("assets/images/chatgpt-logo.png"),
             ),
             title: const Text(
-              "Chat GPT",
+              "Trò chuyện với ChatGPT",
               style: TextStyle(color: Colors.white),
             ),
             actions: [
@@ -198,12 +213,12 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ],
                 const SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
                 Material(
-                  color: Color(0xFF444654),
+                  color: const Color(0xFF444654),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(1.0),
                     child: Row(
                       children: [
                         Expanded(
@@ -215,7 +230,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             },
                             maxLines: null,
                             decoration: const InputDecoration.collapsed(
-                                hintText: "Nhập text ở đây",
+                                hintText: "Nhập tin nhắn...",
                                 hintStyle: TextStyle(color: Colors.grey)),
                           ),
                         ),

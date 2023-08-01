@@ -50,6 +50,7 @@ dependencies:
   flutter_highlight: {version}
   google_fonts: {version}
   document_analysis: ^0.2.0
+  flutter_snake_navigationbar: ^0.6.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

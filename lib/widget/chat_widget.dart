@@ -32,7 +32,9 @@ class ChatWidget extends StatelessWidget {
     return Column(
       children: [
         Material(
-          color: chatIndext == 0 ? Color(0xFF444654) : Color(0xFF343541),
+          color: chatIndext == 0
+              ? const Color(0xFF444654)
+              : const Color(0xFF343541),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(

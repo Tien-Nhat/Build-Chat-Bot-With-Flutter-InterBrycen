@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gptbrycen/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:gptbrycen/tab_screen.dart';
 import 'firebase_options.dart';
-import 'chat_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             final document = snapshot.data;
             Map<String, dynamic>? data = document?.data();
             if (data?["test2"] == "true") {
-              return const ChatScreen();
+              return const TabsScreen();
             }
             return const home_screen();
           }),
