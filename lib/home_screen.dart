@@ -20,16 +20,11 @@ class _home_screen extends State<home_screen> {
       Uri.parse("https://api.openai.com/v1/models"),
       headers: {"Authorization": "Bearer $apiKey"},
     );
-    var collection = FirebaseFirestore.instance.collection('memory');
-    var docSnapshot = await collection.doc('test1').get();
-    Map<String, dynamic> data = docSnapshot.data()!;
-    print(data["test2"]);
     if (response.statusCode == 200) {
       _isAPI = true;
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 
   Future<void> _submit() async {

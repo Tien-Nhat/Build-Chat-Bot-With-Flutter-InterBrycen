@@ -18,6 +18,17 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _isTyping = false;
   String _checkconnect = "true";
   String? ResultSPeech;
+
+  final ScrollController _controller = ScrollController();
+
+  void _scrollDown() {
+    _controller.animateTo(
+      _controller.position.minScrollExtent,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
   void onListen() async {
     var collection = FirebaseFirestore.instance.collection('memory');
     var docSnapshot = await collection.doc('test1').get();
@@ -64,6 +75,20 @@ class _ChatScreenState extends State<ChatScreen> {
     textEditingController = TextEditingController();
     super.initState();
     _speech = stt.SpeechToText();
+    _controller.addListener(() {
+      if (_controller.position.atEdge) {
+        bool isTop = _controller.position.pixels == 0;
+
+        if (isTop) {
+          setState(
+            () {
+              _checkconnect = "false";
+            },
+          );
+          index = 1;
+        }
+      }
+    });
   }
 
   @override
@@ -80,7 +105,6 @@ class _ChatScreenState extends State<ChatScreen> {
       int lastNewlineIndex =
           dialogue.lastIndexOf("Human:", dialogue.length - maxLength);
       if (lastNewlineIndex == -1) {
-        // print(dialogue.substring(0, maxLength));
         return dialogue.substring(0, maxLength);
       } else {
         // Cắt phần đầu chuỗi từ ký tự xuống dòng gần nhất
@@ -90,61 +114,68 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void _submitMessage() async {
-    if (textEditingController.text.trim().isEmpty) {
-      return;
-    }
-    final enteredMessage = textEditingController.text;
-    if (_isListening) {
-      setState(() {
-        _isListening = false;
-        _speech.stop();
-      });
-    }
-    _isTyping = true;
     var collection = FirebaseFirestore.instance.collection('memory');
     var docSnapshot = await collection.doc('test1').get();
     Map<String, dynamic> data = docSnapshot.data()!;
-    _checkconnect = data["CheckConnect"];
-    OpenAI.apiKey = data["APIKey"];
+    try {
+      if (textEditingController.text.trim().isEmpty) {
+        return;
+      }
+      final enteredMessage = textEditingController.text;
+      if (_isListening) {
+        setState(() {
+          _isListening = false;
+          _speech.stop();
+        });
+      }
+      _isTyping = true;
 
-    FocusScope.of(context).unfocus();
+      _checkconnect = data["CheckConnect"];
+      OpenAI.apiKey = data["APIKey"];
 
-    textEditingController.clear();
+      FocusScope.of(context).unfocus();
 
-    FirebaseFirestore.instance.collection("chat").add({
-      "text": enteredMessage,
-      "createdAt": Timestamp.now(),
-      "Indext": 0,
-    });
+      textEditingController.clear();
 
-    OpenAIChatCompletionModel chatCompletion =
-        await OpenAI.instance.chat.create(
-      model: "gpt-3.5-turbo",
-      messages: [
-        OpenAIChatCompletionChoiceMessageModel(
-          content: data["History"] + "\nHuman: " + enteredMessage + "\nAI:",
-          role: OpenAIChatMessageRole.user,
-        ),
-      ],
-    );
-    // OpenAIEmbeddingsModel embeddings = await OpenAI.instance.embedding.create(
-    //   model: "text-embedding-ada-002",
-    //   input: data["History"],
-    // );
+      FirebaseFirestore.instance.collection("chat").add({
+        "text": enteredMessage,
+        "createdAt": Timestamp.now(),
+        "Indext": 0,
+      });
 
-    _isTyping = false;
-    FirebaseFirestore.instance.collection("chat").add({
-      "text": chatCompletion.choices[0].message.content,
-      "createdAt": Timestamp.now(),
-      "Indext": 1,
-    });
+      OpenAIChatCompletionModel chatCompletion =
+          await OpenAI.instance.chat.create(
+        model: "gpt-3.5-turbo",
+        messages: [
+          OpenAIChatCompletionChoiceMessageModel(
+            content: data["History"] + "\nHuman: " + enteredMessage + "\nAI:",
+            role: OpenAIChatMessageRole.user,
+          ),
+        ],
+      );
 
-    FirebaseFirestore.instance.collection("memory").doc("test1").update({
-      "History":
-          "${cutDialogue(data["History"])}\nHuman:$enteredMessage\nAI:${chatCompletion.choices[0].message.content}",
-    });
+      _isTyping = false;
+      FirebaseFirestore.instance.collection("chat").add({
+        "text": chatCompletion.choices[0].message.content,
+        "createdAt": Timestamp.now(),
+        "Indext": 1,
+      });
+
+      FirebaseFirestore.instance.collection("memory").doc("test1").update({
+        "History":
+            "${cutDialogue(data["History"])}\nHuman:$enteredMessage\nAI:${chatCompletion.choices[0].message.content}",
+      });
+    } catch (e) {
+      _isTyping = false;
+      FirebaseFirestore.instance.collection("chat").add({
+        "text": e,
+        "createdAt": Timestamp.now(),
+        "Indext": 1,
+      });
+    }
   }
 
+  int index = 1;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -164,37 +195,31 @@ class _ChatScreenState extends State<ChatScreen> {
         }
         final loadedMessages = chatSnapshots.data!.docs;
         return Scaffold(
-          appBar: AppBar(
-            elevation: 2,
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset("assets/images/chatgpt-logo.png"),
-            ),
-            title: const Text(
-              "Trò chuyện với ChatGPT",
-              style: TextStyle(color: Colors.white),
-            ),
-            actions: [
-              IconButton(
-                  onPressed: () async {
-                    FirebaseFirestore.instance
-                        .collection("memory")
-                        .doc("test1")
-                        .update({
-                      "test2": "false",
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.exit_to_app,
-                    color: Colors.white,
-                  ))
-            ],
-          ),
-          body: SafeArea(
+          floatingActionButton: (index == 0)
+              ? FloatingActionButton.small(
+                  onPressed: _scrollDown,
+                  child: const Icon(Icons.arrow_downward),
+                )
+              : null,
+          body: NotificationListener<ScrollNotification>(
+            onNotification: (ScrollNotification scrollInfo) {
+              // Kiểm tra nếu người dùng đang cuộn ListView
+              if (scrollInfo is ScrollUpdateNotification) {
+                if (_controller.position.pixels > 0 && index == 1) {
+                  setState(() {
+                    _checkconnect = "false";
+                  });
+
+                  index = 0;
+                }
+              }
+              return true; // Trả về true để bỏ qua các thông báo khác liên quan đến cuộn
+            },
             child: Column(
               children: [
                 Flexible(
                   child: ListView.builder(
+                    controller: _controller,
                     reverse: true,
                     itemCount: loadedMessages.length,
                     itemBuilder: (context, index) {
@@ -215,48 +240,50 @@ class _ChatScreenState extends State<ChatScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                Material(
-                  color: const Color(0xFF444654),
-                  child: Padding(
-                    padding: const EdgeInsets.all(1.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            style: const TextStyle(color: Colors.white),
-                            controller: textEditingController,
-                            onSubmitted: (value) {
-                              _submitMessage();
-                            },
-                            maxLines: null,
-                            decoration: const InputDecoration.collapsed(
-                                hintText: "Nhập tin nhắn...",
-                                hintStyle: TextStyle(color: Colors.grey)),
-                          ),
-                        ),
-                        IconButton(
-                            onPressed: () => onListen(),
-                            icon: Icon(
-                              _isListening ? Icons.mic : Icons.mic_off,
-                              color: _isListening
-                                  ? Colors.lightBlue
-                                  : Colors.white,
-                            )),
-                        IconButton(
-                            onPressed: _submitMessage,
-                            icon: const Icon(
-                              Icons.send,
-                              color: Colors.white,
-                            ))
-                      ],
-                    ),
-                  ),
-                )
               ],
             ),
           ),
+          bottomNavigationBar: searchInput(),
         );
       },
+    );
+  }
+
+  Widget searchInput() {
+    return Container(
+      color: Color(0xFF444654),
+      child: Padding(
+        padding: const EdgeInsets.all(1.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                style: const TextStyle(color: Colors.white),
+                controller: textEditingController,
+                onSubmitted: (value) {
+                  _submitMessage();
+                },
+                maxLines: null,
+                decoration: const InputDecoration.collapsed(
+                    hintText: "Nhập tin nhắn...",
+                    hintStyle: TextStyle(color: Colors.grey)),
+              ),
+            ),
+            IconButton(
+                onPressed: () => onListen(),
+                icon: Icon(
+                  _isListening ? Icons.mic : Icons.mic_off,
+                  color: _isListening ? Colors.lightBlue : Colors.white,
+                )),
+            IconButton(
+                onPressed: _submitMessage,
+                icon: const Icon(
+                  Icons.send,
+                  color: Colors.white,
+                ))
+          ],
+        ),
+      ),
     );
   }
 }

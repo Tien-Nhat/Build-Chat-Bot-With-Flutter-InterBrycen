@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 
+// ignore: must_be_immutable
 class ChatWidget extends StatelessWidget {
   ChatWidget({super.key, required this.msg, required this.chatIndext});
   final String msg;
