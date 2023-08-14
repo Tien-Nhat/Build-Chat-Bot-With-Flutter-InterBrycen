@@ -47,7 +47,15 @@ flutter build apk
 ````
 ## If you want to run the project, please follow the steps below:
 
-### 1. Clone this github repository app
+### 1. Firebase setup
+- 1.Access [Firebase](https://firebase.google.com/) and log in to your Google account.
+  
+- 2.Click on 'Get Started' and begin creating the project.
+
+  ![create project](https://github.com/Shu-Kei/gptbrycen/assets/125178921/40cf2b56-a0f7-479e-99f6-470a5825edad)
+
+
+### 2. Clone this github repository app
 
 - Open a folder in your computer that you want to add this app.
 - Open git (in step 2), then type:
@@ -61,7 +69,7 @@ git clone https://github.com/Shu-Kei/gptbrycen.git
 flutter pub get
 ```
 
-### 2. Setup flutterfire 🔥
+### 3. Setup flutterfire 🔥
 #### Step 1: Install the required command line tools
 
 1. If you haven't already, you can follow the steps below:
