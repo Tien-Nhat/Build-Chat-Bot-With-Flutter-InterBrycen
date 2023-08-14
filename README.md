@@ -86,6 +86,7 @@ dart pub global activate flutterfire_cli
 ```
 
 #### Step 2: Configure your apps to use Firebase
+
 Use the FlutterFire CLI to configure your Flutter apps to connect to Firebase.
 From your Flutter project directory, run the following command to start the app configuration workflow:
 
@@ -94,6 +95,7 @@ flutterfire configure
 ```
 
 #### Step 3: Initialize Firebase in your app
+
 1. From your Flutter project directory, run the following command to install the core plugin:
    
 ```bash
