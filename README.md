@@ -96,7 +96,7 @@ flutterfire configure
 
 #### Step 3: Initialize Firebase in your app
 
-1. From your Flutter project directory, run the following command to install the core plugin:
+1.From your Flutter project directory, run the following command to install the core plugin:
    
 ```bash
 flutter pub add firebase_core
