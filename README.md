@@ -19,11 +19,11 @@
 * Chat with AI: Enjoy dynamic conversations with our AI chatbot, with Speech-to-Text and Text-to-Speech features.
 * Summarize Content: Extract key information from audio, text, and PDF files effortlessly.
 
-## Screenshots
+## Screens
 
-| Screenshot 1                                 | Screenshot 2                                 | Screenshot 3                                 |
-|----------------------------------------------|----------------------------------------------|----------------------------------------------|
-|![Home UI](https://github.com/Shu-Kei/gptbrycen/assets/125178921/12d839bd-1763-45cd-9ac5-c53d146b7bd4)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/aa0b14df-8767-4087-bb77-f8dc11934276)|![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/6fdcb2c6-876e-4150-9ee8-0797603604b8)|
+| Home                                         | Chat                                         | Tab                                          | Summarize                                    |
+|----------------------------------------------|----------------------------------------------|----------------------------------------------|----------------------------------------------|
+|![Home UI](https://github.com/Shu-Kei/gptbrycen/assets/125178921/12d839bd-1763-45cd-9ac5-c53d146b7bd4)|![untitled1](https://github.com/Shu-Kei/gptbrycen/assets/125178921/74df9314-e714-467c-b006-06664914043d)|![untitled2](https://github.com/Shu-Kei/gptbrycen/assets/125178921/a25d9df1-5320-41a5-a733-2dd47410cbc3)|![untitled4](https://github.com/Shu-Kei/gptbrycen/assets/125178921/69724eee-b4af-4291-99e2-1a308ca1fbaa)|
 
 
 
