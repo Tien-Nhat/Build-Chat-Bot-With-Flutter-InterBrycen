@@ -58,8 +58,12 @@ flutter build apk
 
 ![video (1)](https://github.com/Shu-Kei/gptbrycen/assets/125178921/27796124-861e-4fdb-bd76-56f137733fa5)
 
-  
-- 4.Create the following value variables in Cloud Firestore for use in the app.
+- 4.Update the rules to grant public access permission.
+
+![video (2)](https://github.com/Shu-Kei/gptbrycen/assets/125178921/9ce7cab0-adcc-46ea-8e23-e03b0a4b5ddb)
+
+
+- 5.Create the following value variables in Cloud Firestore for use in the app.
   
 ![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/e444b7f9-970e-45c7-a69c-90b9da3061ba)
 
