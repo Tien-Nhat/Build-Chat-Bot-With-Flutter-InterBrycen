@@ -61,7 +61,8 @@ flutter build apk
   
 - 4.Create the following value variables in Cloud Firestore for use in the app.
   
-![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/e48802f6-6549-44aa-8d82-2cdb2a00314f)
+![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/ba5f031e-b44a-42e2-ac17-01520f418d7f)
+
 
 
 
@@ -154,3 +155,15 @@ BrycenChat was built using the following open-source libraries and tools:
 * 30/07/2023: Latest update brings a refreshed chat interface with added Markdown support for AI messages. Now, the AI can send messages in Markdown format for enhanced formatting options. Additionally, the chat now features a background Markdown code block, capable of detecting and displaying programming language syntax for a better coding experience.
 
 * 01/08/2023: Another exciting update is here! Introducing the new feature that allows users to summarize content within TXT files. Now, users can effortlessly import TXT files from their phones and ask the AI any questions related to the file's content.
+
+* 05/08/2023: Add PDF reading functionality to the 'Summarize'.
+
+* 09/08/2023: Successfully solve the issue of extracting content from audio files.
+
+* 10/08/2023: Successfully summarize an audio file. Integrate a feature to suggest questions related to the content of the file.
+  
+* 12/08/2023: Detect an issue of content being too long, which exceeds the summarization model's limitations, preventing the summarization of the content in the file.
+
+* 13/08/2023: Successfully resolve the issue of excessively long text by segmenting the text into smaller parts for embedding by the model.
+
+* 14/08/2023: Refine the app, removing any redundant lines of code.
