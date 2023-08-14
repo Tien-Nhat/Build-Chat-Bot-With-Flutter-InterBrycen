@@ -52,8 +52,14 @@ flutter build apk
   
 - 2.Click on 'Get Started' and begin creating the project.
 
-  ![create project](https://github.com/Shu-Kei/gptbrycen/assets/125178921/40cf2b56-a0f7-479e-99f6-470a5825edad)
+![create project](https://github.com/Shu-Kei/gptbrycen/assets/125178921/40cf2b56-a0f7-479e-99f6-470a5825edad)
+  
+- 3.Initialize Cloud Firestore in Firebase.
 
+![video (1)](https://github.com/Shu-Kei/gptbrycen/assets/125178921/27796124-861e-4fdb-bd76-56f137733fa5)
+
+  
+- 
 
 ### 2. Clone this github repository app
 
@@ -108,6 +114,10 @@ flutterfire configure
    
 ```bash
 flutter pub add firebase_core
+```
+
+```bash
+flutter pub add cloud_firestore
 ```
 
 2.From your Flutter project directory, run the following command to ensure that your Flutter app's Firebase configuration is up-to-date:
