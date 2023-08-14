@@ -59,7 +59,7 @@ git clone https://github.com/Shu-Kei/gptbrycen.git
 ```bash
 flutter pub get
 ```
-### 2. Setup flutterfire :smile:
+### 2. Setup flutterfire 🔥
 #### Step 1: Install the required command line tools
 
 ### 1.If you haven't already, you can follow the steps below:
