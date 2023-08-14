@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gptbrycen/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gptbrycen/tab_screen.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
             }
             return const home_screen();
           }),
+      builder: EasyLoading.init(),
     );
   }
 }

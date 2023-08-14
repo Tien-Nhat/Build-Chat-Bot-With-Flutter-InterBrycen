@@ -167,11 +167,14 @@ class _ChatScreenState extends State<ChatScreen> {
       });
     } catch (e) {
       _isTyping = false;
-      FirebaseFirestore.instance.collection("chat").add({
-        "text": e,
-        "createdAt": Timestamp.now(),
-        "Indext": 1,
-      });
+
+      if (e is RequestFailedException) {
+        FirebaseFirestore.instance.collection("chat").add({
+          "text": e.message,
+          "createdAt": Timestamp.now(),
+          "Indext": 1,
+        });
+      }
     }
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:gptbrycen/chat_screen.dart';
 import 'package:gptbrycen/summarize.dart';
+
 import 'package:http/http.dart' as http;
 
 class TabsScreen extends StatefulWidget {
@@ -177,15 +178,17 @@ class _TabsScreenState extends State<TabsScreen> {
             (item == "chat")
                 ? IconButton(
                     onPressed: () async {
-                      FirebaseFirestore.instance
-                          .collection("memory")
-                          .doc("test1")
-                          .update({
-                        "test2": "false",
-                      });
+                      final instance = FirebaseFirestore.instance;
+                      final batch = instance.batch();
+                      var collection = instance.collection("chat");
+                      var snapshots = await collection.get();
+                      for (var doc in snapshots.docs) {
+                        batch.delete(doc.reference);
+                      }
+                      await batch.commit();
                     },
                     icon: const Icon(
-                      Icons.exit_to_app,
+                      Icons.delete,
                       color: Colors.white,
                     ))
                 : IconButton(
