@@ -34,7 +34,9 @@
 
 
 # HOW TO RUN THIS APP 
+
 ##If you want to use the APK to install on your phone, please run the following command:
+
 You can download the APK file from the releases section of this repository or build the app from source using the
 instructions below:
 
@@ -44,6 +46,7 @@ cd gptbrycen
 flutter build apk
 ````
 ##If you want to run the project, please follow the steps below:
+
 ### 1. Clone this github repository app
 
 - Open a folder in your computer that you want to add this app.
