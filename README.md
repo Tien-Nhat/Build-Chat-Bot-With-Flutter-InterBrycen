@@ -62,8 +62,43 @@ flutter pub get
 ### 2. Setup flutterfire 🔥
 #### Step 1: Install the required command line tools
 
-### 1.If you haven't already, you can follow the steps below:
+1 .If you haven't already, you can follow the steps below:
 - 1.Download [Node.js](https://nodejs.org/en/download) and install it on your computer.
+- 2.Open the terminal and type the following command to install the Firebase CLI:
+
+```bash
+npm install -g firebase-tools
+```
+2. Log into Firebase using your Google account by running the following command:
+
+```bash
+firebase login
+```
+3. Install the FlutterFire CLI by running the following command from any directory:
+
+```bash
+dart pub global activate flutterfire_cli
+```
+#### Step 2: Configure your apps to use Firebase
+Use the FlutterFire CLI to configure your Flutter apps to connect to Firebase.
+From your Flutter project directory, run the following command to start the app configuration workflow:
+
+```bash
+flutterfire configure
+```
+
+#### Step 3: Initialize Firebase in your app
+1. From your Flutter project directory, run the following command to install the core plugin:
+   
+```bash
+flutter pub add firebase_core
+```
+2.From your Flutter project directory, run the following command to ensure that your Flutter app's Firebase configuration is up-to-date:
+
+```bash
+flutterfire configure
+```
+
 # Usage
 
 Enter your ChatGPT API key to log in to the Chat Screen.
