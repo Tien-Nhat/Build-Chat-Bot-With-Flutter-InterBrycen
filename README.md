@@ -33,8 +33,8 @@
 
 
 
-## Installation
-
+# HOW TO RUN THIS APP 
+##If you want to use the APK to install on your phone, please run the following command:
 You can download the APK file from the releases section of this repository or build the app from source using the
 instructions below:
 
@@ -43,16 +43,29 @@ git clone https://github.com/Shu-Kei/gptbrycen.git
 cd gptbrycen
 flutter build apk
 ````
+##If you want to run the project, please follow the steps below:
+### 1. Clone this github repository app
 
-## Usage
+- Open a folder in your computer that you want to add this app.
+- Open git (in step 2), then type:
+
+```bash
+git clone https://github.com/Shu-Kei/gptbrycen.git
+```
+- Open your project terminal, then type:
+```bash
+flutter pub get
+```
+### 2. Setup flutterfire
+####Step 1: Install the required command line tools
+# Usage
 
 Enter your ChatGPT API key to log in to the Chat Screen.
 Access the chatbot for interactive conversations.
 Switch to the "Summarize" screen to summarize content.
 Upload audio, text, or PDF files for quick summaries.
 
-
-## Acknowledgements
+# Acknowledgements
 
 BrycenChat was built using the following open-source libraries and tools:
 
@@ -61,7 +74,7 @@ BrycenChat was built using the following open-source libraries and tools:
 * [OpenAI GPT](https://beta.openai.com/)
 * [Google Fonts](https://fonts.google.com/)
 
-## Update
+# Update
 * 24/07/2023: Started developing the Chat app using Flutter Dart. Completed the initial version of the chat feature with AI integration. The app now allows users to chat with the AI-powered chatbot, providing dynamic and interactive conversations.
 
 * 27/07/2023: Implemented essential updates to the app. Added the much-awaited Text-to-Speech and Speech-to-Text functionalities to enhance the chat with AI experience. Users can now use voice commands to communicate with the chatbot, making interactions more convenient and hands-free.Added content summarization with file upload from Android devices.
