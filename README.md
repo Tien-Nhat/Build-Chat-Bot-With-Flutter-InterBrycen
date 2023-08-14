@@ -56,13 +56,16 @@ flutter build apk
 git clone https://github.com/Shu-Kei/gptbrycen.git
 ```
 - Open your project terminal, then type:
+
 ```bash
 flutter pub get
 ```
+
 ### 2. Setup flutterfire 🔥
 #### Step 1: Install the required command line tools
 
 1 .If you haven't already, you can follow the steps below:
+
 - 1.Download [Node.js](https://nodejs.org/en/download) and install it on your computer.
 - 2.Open the terminal and type the following command to install the Firebase CLI:
 
