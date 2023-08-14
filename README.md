@@ -45,7 +45,7 @@ git clone https://github.com/Shu-Kei/gptbrycen.git
 cd gptbrycen
 flutter build apk
 ````
-##If you want to run the project, please follow the steps below:
+###If you want to run the project, please follow the steps below:
 
 ### 1. Clone this github repository app
 
