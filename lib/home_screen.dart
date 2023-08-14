@@ -14,7 +14,7 @@ class _home_screen extends State<home_screen> {
   final _form = GlobalKey<FormState>();
   var _enteredAPI = "";
   var _enterUserName = "";
-  bool? _isAPI;
+  bool _isAPI = true;
   Future<bool> checkApiKey(String apiKey) async {
     final response = await http.get(
       Uri.parse("https://api.openai.com/v1/models"),
@@ -34,7 +34,9 @@ class _home_screen extends State<home_screen> {
     }
     var collection = FirebaseFirestore.instance.collection('memory');
     if (_isAPI == true && _enterUserName.trim().length >= 4) {
-      collection.doc("test1").update({"APIKey": _enteredAPI, "test2": "true"});
+      collection
+          .doc("memory")
+          .update({"APIKey": _enteredAPI, "isConnect": true});
     }
   }
 
@@ -89,6 +91,7 @@ class _home_screen extends State<home_screen> {
                             textCapitalization: TextCapitalization.none,
                             onChanged: (value) async {
                               final check = await checkApiKey(value);
+                              print(check);
                               setState(() => _isAPI = check);
                             },
                             validator: (value) {

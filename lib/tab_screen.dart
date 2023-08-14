@@ -48,7 +48,7 @@ class _TabsScreenState extends State<TabsScreen> {
     var collection = FirebaseFirestore.instance.collection('memory');
     if (_isAPI == true) {
       dismissDailog();
-      collection.doc("test1").update({"APIKey": _enteredAPI});
+      collection.doc("memory").update({"APIKey": _enteredAPI});
     }
   }
 
@@ -137,9 +137,9 @@ class _TabsScreenState extends State<TabsScreen> {
                 onTap: () {
                   FirebaseFirestore.instance
                       .collection("memory")
-                      .doc("test1")
+                      .doc("memory")
                       .update({
-                    "test2": "false",
+                    "isConnect": false,
                   });
                 },
                 leading: const Icon(Icons.exit_to_app),

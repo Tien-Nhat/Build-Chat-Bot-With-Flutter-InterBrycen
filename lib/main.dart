@@ -32,12 +32,12 @@ class MyApp extends StatelessWidget {
       home: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection("memory")
-              .doc("test1")
+              .doc("memory")
               .snapshots(),
           builder: (ctx, snapshot) {
             final document = snapshot.data;
             Map<String, dynamic>? data = document?.data();
-            if (data?["test2"] == "true") {
+            if (data?["isConnect"] == true) {
               return const TabsScreen();
             }
             return const home_screen();

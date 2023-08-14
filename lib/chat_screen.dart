@@ -4,6 +4,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:dart_openai/dart_openai.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -16,7 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
   late stt.SpeechToText _speech;
   bool _isListening = false;
   bool _isTyping = false;
-  String _checkconnect = "true";
+  bool _checkconnect = true;
   String? ResultSPeech;
 
   final ScrollController _controller = ScrollController();
@@ -31,7 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void onListen() async {
     var collection = FirebaseFirestore.instance.collection('memory');
-    var docSnapshot = await collection.doc('test1').get();
+    var docSnapshot = await collection.doc('memory').get();
     Map<String, dynamic> data = docSnapshot.data()!;
     _checkconnect = data["CheckConnect"];
     if (!_isListening) {
@@ -69,12 +70,14 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   late TextEditingController textEditingController;
+  late FirebaseDatabase database;
 
   @override
   void initState() {
     textEditingController = TextEditingController();
     super.initState();
     _speech = stt.SpeechToText();
+    database = FirebaseDatabase.instance;
     _controller.addListener(() {
       if (_controller.position.atEdge) {
         bool isTop = _controller.position.pixels == 0;
@@ -82,7 +85,7 @@ class _ChatScreenState extends State<ChatScreen> {
         if (isTop) {
           setState(
             () {
-              _checkconnect = "false";
+              _checkconnect = false;
             },
           );
           index = 1;
@@ -115,7 +118,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _submitMessage() async {
     var collection = FirebaseFirestore.instance.collection('memory');
-    var docSnapshot = await collection.doc('test1').get();
+    var docSnapshot = await collection.doc('memory').get();
     Map<String, dynamic> data = docSnapshot.data()!;
     try {
       if (textEditingController.text.trim().isEmpty) {
@@ -161,7 +164,7 @@ class _ChatScreenState extends State<ChatScreen> {
         "Indext": 1,
       });
 
-      FirebaseFirestore.instance.collection("memory").doc("test1").update({
+      FirebaseFirestore.instance.collection("memory").doc("memory").update({
         "History":
             "${cutDialogue(data["History"])}\nHuman:$enteredMessage\nAI:${chatCompletion.choices[0].message.content}",
       });
@@ -191,7 +194,7 @@ class _ChatScreenState extends State<ChatScreen> {
           .snapshots(),
       builder: (ctx, chatSnapshots) {
         if (chatSnapshots.connectionState == ConnectionState.waiting &&
-            _checkconnect == "true") {
+            _checkconnect == true) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -210,7 +213,7 @@ class _ChatScreenState extends State<ChatScreen> {
               if (scrollInfo is ScrollUpdateNotification) {
                 if (_controller.position.pixels > 0 && index == 1) {
                   setState(() {
-                    _checkconnect = "false";
+                    _checkconnect = false;
                   });
 
                   index = 0;

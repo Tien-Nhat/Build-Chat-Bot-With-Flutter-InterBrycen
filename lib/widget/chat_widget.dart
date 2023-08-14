@@ -244,12 +244,12 @@ class ChatWidget extends StatelessWidget {
       if (_checkEm) {
         await FirebaseFirestore.instance
             .collection("memory")
-            .doc("test1")
+            .doc("memory")
             .update({"_checkEmbbed": true});
         _checkEm = false;
       }
       var collection = FirebaseFirestore.instance.collection('memory');
-      var docSnapshot = await collection.doc('test1').get();
+      var docSnapshot = await collection.doc('memory').get();
       Map<String, dynamic> data = docSnapshot.data()!;
       FirebaseFirestore.instance.collection("chatSummarize").add({
         "text": kq1,
@@ -260,20 +260,20 @@ class ChatWidget extends StatelessWidget {
       if (data["_checkEmbbed"] || data["APIKey"] != data["OldAPIKey"]) {
         await FirebaseFirestore.instance
             .collection("memory")
-            .doc("test1")
+            .doc("memory")
             .update({"OldAPIKey": data["APIKey"]});
         retrievalQA =
             await readFile(data["FilePath"], data["APIKey"], data["Content"]);
         await FirebaseFirestore.instance
             .collection("memory")
-            .doc("test1")
+            .doc("memory")
             .update({"_checkEmbbed": false});
       }
 
       final res = await retrievalQA(kq1);
       FirebaseFirestore.instance
           .collection("memory")
-          .doc("test1")
+          .doc("memory")
           .update({"Document": res.toString()});
       FirebaseFirestore.instance.collection("chatSummarize").add({
         "text": res["result"].toString(),
@@ -306,7 +306,7 @@ class ChatWidget extends StatelessWidget {
   ) async {
     FirebaseFirestore.instance
         .collection("memory")
-        .doc("test1")
+        .doc("memory")
         .update({"FilePath": Path});
     List<Document> documents = [];
     List<String> URLs = [];

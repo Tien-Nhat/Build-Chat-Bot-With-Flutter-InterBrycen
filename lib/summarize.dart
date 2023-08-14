@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+// ignore: library_prefixes
 import 'package:dart_openai/dart_openai.dart' as dartOpenAI;
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gptbrycen/widget/chat_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 // import 'package:url_launcher/url_launcher.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _summarize extends State<summarize> {
   late stt.SpeechToText _speech;
   bool _isListening = false;
   bool _isTyping = false;
-  String _checkconnect = "true";
+  bool _checkconnect = true;
   bool _checkReload = true;
   List<String> kq = [];
   int? chatMessage;
@@ -70,7 +71,7 @@ class _summarize extends State<summarize> {
         if (isTop) {
           setState(
             () {
-              _checkconnect = "false";
+              _checkconnect = false;
             },
           );
           indexScroll = 1;
@@ -87,7 +88,7 @@ class _summarize extends State<summarize> {
 
   void onListen() async {
     var collection = FirebaseFirestore.instance.collection('memory');
-    var docSnapshot = await collection.doc('test1').get();
+    var docSnapshot = await collection.doc('memory').get();
     Map<String, dynamic> data = docSnapshot.data()!;
     _checkconnect = data["CheckConnect"];
     if (!_isListening) {
@@ -127,7 +128,7 @@ class _summarize extends State<summarize> {
   void _submitMessage() async {
     _isTyping = true;
     var collection = FirebaseFirestore.instance.collection('memory');
-    var docSnapshot = await collection.doc('test1').get();
+    var docSnapshot = await collection.doc('memory').get();
     Map<String, dynamic> data = docSnapshot.data()!;
     _checkconnect = data["CheckConnect"];
 
@@ -156,7 +157,7 @@ class _summarize extends State<summarize> {
       if (_checkReload || data["APIKey"] != data["OldAPIKey"]) {
         await FirebaseFirestore.instance
             .collection("memory")
-            .doc("test1")
+            .doc("memory")
             .update({"OldAPIKey": data["APIKey"]});
         RetrievalQAChain temp;
         temp =
@@ -172,7 +173,7 @@ class _summarize extends State<summarize> {
       final res = await retrievalQA(enteredMessage);
       FirebaseFirestore.instance
           .collection("memory")
-          .doc("test1")
+          .doc("memory")
           .update({"Document": res.toString()});
       FirebaseFirestore.instance.collection("chatSummarize").add({
         "text": res["result"].toString(),
@@ -183,13 +184,11 @@ class _summarize extends State<summarize> {
       _isTyping = false;
     } catch (e) {
       if (e.toString().endsWith("statusCode: 429}")) {
-        if (e is dartOpenAI.RequestFailedException) {
-          FirebaseFirestore.instance.collection("chatSummarize").add({
-            "text": e.message,
-            "createdAt": Timestamp.now(),
-            "Indext": 1,
-          });
-        }
+        FirebaseFirestore.instance.collection("chatSummarize").add({
+          "text": e.toString(),
+          "createdAt": Timestamp.now(),
+          "Indext": 1,
+        });
       } else {
         FirebaseFirestore.instance.collection("chatSummarize").add({
           "text":
@@ -217,7 +216,7 @@ class _summarize extends State<summarize> {
           .snapshots(),
       builder: (ctx, chatSnapshots) {
         if (chatSnapshots.connectionState == ConnectionState.waiting &&
-            _checkconnect == "true") {
+            _checkconnect == true) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -240,7 +239,7 @@ class _summarize extends State<summarize> {
               if (scrollInfo is ScrollUpdateNotification) {
                 if (_controller.position.pixels > 0 && indexScroll == 1) {
                   setState(() {
-                    _checkconnect = "false";
+                    _checkconnect = false;
                   });
 
                   indexScroll = 0;
@@ -315,7 +314,7 @@ class _summarize extends State<summarize> {
                                 ElevatedButton.icon(
                                     onPressed: () {
                                       setState(() {
-                                        _checkconnect = "false";
+                                        _checkconnect = false;
                                         _isReadFile = !_isReadFile;
                                       });
                                     },
@@ -411,7 +410,7 @@ class _summarize extends State<summarize> {
   ) async {
     FirebaseFirestore.instance
         .collection("memory")
-        .doc("test1")
+        .doc("memory")
         .update({"FilePath": Path});
     List<Document> documents = [];
     List<String> URLs = [];
@@ -514,18 +513,23 @@ class _summarize extends State<summarize> {
       final TypePath = lookupMimeType(file.path!);
 
       var collection = FirebaseFirestore.instance.collection('memory');
-      var docSnapshot = await collection.doc('test1').get();
+      var docSnapshot = await collection.doc('memory').get();
       Map<String, dynamic> data = docSnapshot.data()!;
 
-      await FirebaseFirestore.instance.collection("memory").doc("test1").update(
-          {"Content": "", "_checkEmbbed": true, "OldAPIKey": data["APIKey"]});
+      await FirebaseFirestore.instance
+          .collection("memory")
+          .doc("memory")
+          .update({
+        "Content": "",
+        "_checkEmbbed": true,
+        "OldAPIKey": data["APIKey"]
+      });
 
-      dartOpenAI.OpenAI.apiKey = data["APIKey"];
       if (TypePath == ("text/plain")) {
         String convertedValue = utf8.decode(file.bytes!);
         await FirebaseFirestore.instance
             .collection("memory")
-            .doc("test1")
+            .doc("memory")
             .update({"Content": splitAndFormatString(convertedValue)});
       }
 
@@ -535,7 +539,7 @@ class _summarize extends State<summarize> {
         String text = PdfTextExtractor(document).extractText();
         await FirebaseFirestore.instance
             .collection("memory")
-            .doc("test1")
+            .doc("memory")
             .update({"Content": splitAndFormatString(text)});
       }
 
@@ -548,7 +552,7 @@ class _summarize extends State<summarize> {
         );
         await FirebaseFirestore.instance
             .collection("memory")
-            .doc("test1")
+            .doc("memory")
             .update({"Content": splitAndFormatString(transcription.text)});
       }
 
@@ -556,53 +560,41 @@ class _summarize extends State<summarize> {
           maskType: EasyLoadingMaskType.black,
           status: '${(0.1 * 100).toStringAsFixed(0)}%');
 
-      var docSnapshot1 = await collection.doc('test1').get();
+      var docSnapshot1 = await collection.doc('memory').get();
       Map<String, dynamic> data1 = docSnapshot1.data()!;
 
-      retrievalQA =
-          await readFile(file.path!, data1["APIKey"], data1["Content"]);
+      // retrievalQA =
+      //     await readFile(file.path!, data1["APIKey"], data1["Content"]);
 
       EasyLoading.showProgress(0.3,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.3 * 100).toStringAsFixed(0)}%');
 
       setState(() {
-        _checkconnect = "false";
+        _checkconnect = false;
         _checkReload = false;
       });
       EasyLoading.showProgress(0.4,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.4 * 100).toStringAsFixed(0)}%');
 
-      final sug = await retrievalQA("Tường thuật chi tiết nội dung");
+      final sug = await getSuggest(data1["Content"], data1["APIKey"], "");
       EasyLoading.showProgress(0.6,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.6 * 100).toStringAsFixed(0)}%');
-      print(sug["result"].toString());
-      dartOpenAI.OpenAIChatCompletionModel chatCompletion =
-          await dartOpenAI.OpenAI.instance.chat.create(
-        model: 'gpt-3.5-turbo-0613',
-        messages: [
-          dartOpenAI.OpenAIChatCompletionChoiceMessageModel(
-            content: sug["result"].toString() +
-                "\nHuman: từ nội dung trên hãy liệt kê tôi 3 câu hỏi ngắn gọn. " +
-                "\nAI:",
-            role: dartOpenAI.OpenAIChatMessageRole.user,
-          ),
-        ],
-      );
+      print(sug);
       EasyLoading.showProgress(1,
           maskType: EasyLoadingMaskType.black,
           status: '${(1 * 100).toStringAsFixed(0)}%');
       FirebaseFirestore.instance.collection("chatSummarize").add({
-        "text": chatCompletion.choices[0].message.content,
+        "text": sug,
         "createdAt": Timestamp.now(),
         "Indext": 3,
       });
       FirebaseFirestore.instance
           .collection("memory")
-          .doc("test1")
-          .update({"Document": sug.toString()});
+          .doc("memory")
+          .update({"Document": sug});
 
       setState(() {
         isLoading = false;
@@ -632,7 +624,7 @@ class _summarize extends State<summarize> {
       } else {
         await FirebaseFirestore.instance
             .collection("memory")
-            .doc("test1")
+            .doc("memory")
             .update({"Content": ""});
       }
     } catch (e) {
@@ -640,9 +632,8 @@ class _summarize extends State<summarize> {
       return;
     }
     var collection = FirebaseFirestore.instance.collection('memory');
-    var docSnapshot = await collection.doc('test1').get();
+    var docSnapshot = await collection.doc('memory').get();
     Map<String, dynamic> data = docSnapshot.data()!;
-    dartOpenAI.OpenAI.apiKey = data["APIKey"];
 
     EasyLoading.showProgress(0,
         maskType: EasyLoadingMaskType.black,
@@ -650,7 +641,7 @@ class _summarize extends State<summarize> {
 
     FirebaseFirestore.instance
         .collection("memory")
-        .doc("test1")
+        .doc("memory")
         .update({"_checkEmbbed": true});
     FocusScope.of(context).unfocus();
 
@@ -669,37 +660,27 @@ class _summarize extends State<summarize> {
           maskType: EasyLoadingMaskType.black,
           status: '${(0.3 * 100).toStringAsFixed(0)}%');
       setState(() {
-        _checkconnect = "false";
+        _checkconnect = false;
         _checkReload = false;
       });
-      final sug = await retrievalQA("Tường thuật chi tiết nội dung");
+      final sug =
+          await getSuggest(data["Content"], data["APIKey"], enteredMessage);
       EasyLoading.showProgress(0.6,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.6 * 100).toStringAsFixed(0)}%');
-      print(sug["result"].toString());
-      dartOpenAI.OpenAIChatCompletionModel chatCompletion =
-          await dartOpenAI.OpenAI.instance.chat.create(
-        model: 'gpt-3.5-turbo-0613',
-        messages: [
-          dartOpenAI.OpenAIChatCompletionChoiceMessageModel(
-            content: sug["result"].toString() +
-                "\nHuman: từ nội dung trên hãy liệt kê tôi 3 câu hỏi có thể tìm đáp án ở trong nó. " +
-                "\nAI:",
-            role: dartOpenAI.OpenAIChatMessageRole.user,
-          ),
-        ],
-      );
+      print(sug);
+
       EasyLoading.showProgress(0.8,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.8 * 100).toStringAsFixed(0)}%');
       FirebaseFirestore.instance.collection("chatSummarize").add({
-        "text": chatCompletion.choices[0].message.content,
+        "text": sug,
         "createdAt": Timestamp.now(),
         "Indext": 3,
       });
       FirebaseFirestore.instance
           .collection("memory")
-          .doc("test1")
+          .doc("memory")
           .update({"Document": sug.toString()});
 
       setState(() {
@@ -713,5 +694,77 @@ class _summarize extends State<summarize> {
       });
       EasyLoading.dismiss();
     }
+  }
+
+  String template = '''
+Khi tôi truy vấn: 'đưa ra 3 câu hỏi' \nVui lòng dựa vào đoạn văn bản sau đây: {page_content} \nSau đó, hiển thị 3 câu hỏi liên quan đến đoạn văn bản theo định dạng sau:
+1.
+2.
+3.
+
+''';
+
+  Future<String> getSuggest(String content, String apiKey, String url) async {
+    List<String> urls = [];
+    List<Document> documents = [];
+    if (url.isNotEmpty) {
+      urls.clear();
+      urls.add(url);
+      FirebaseFirestore.instance
+          .collection("memory")
+          .doc("memory")
+          .update({"FilePath": url});
+
+      WebBaseLoader loader = WebBaseLoader(urls);
+      documents = await loader.load();
+    } else {
+      documents.clear();
+      documents.add(
+          Document(pageContent: content, metadata: const {"source": "local"}));
+    }
+
+    const textSplitter = CharacterTextSplitter(
+      chunkSize: 800,
+      chunkOverlap: 0,
+    );
+    final texts = textSplitter.splitDocuments(documents);
+    final textsWithSources = texts
+        .mapIndexed(
+          (final i, final d) => d.copyWith(
+            metadata: {
+              ...d.metadata,
+              'source': '$i-pl',
+            },
+          ),
+        )
+        .toList(growable: false);
+    final embeddings = OpenAIEmbeddings(apiKey: apiKey);
+    final docSearch = await MemoryVectorStore.fromDocuments(
+      documents: textsWithSources,
+      embeddings: embeddings,
+    );
+
+    final llm = ChatOpenAI(
+      apiKey: apiKey,
+      model: 'gpt-3.5-turbo-0613',
+      temperature: 0.0,
+    );
+
+    final qaChain = OpenAIQAWithSourcesChain(llm: llm);
+    final docPrompt = PromptTemplate.fromTemplate(
+      template,
+    );
+    final finalQAChain = StuffDocumentsChain(
+      llmChain: qaChain,
+      documentPrompt: docPrompt,
+    );
+    RetrievalQAChain ketrievalQA = RetrievalQAChain(
+      retriever: docSearch.asRetriever(),
+      combineDocumentsChain: finalQAChain,
+    );
+    var resul = await ketrievalQA("đưa ra 3 câu hỏi");
+    String resul2 = resul["result"].toString();
+
+    return resul2;
   }
 }
