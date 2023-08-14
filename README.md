@@ -70,7 +70,7 @@ flutter build apk
 ### 2. Clone this github repository app
 
 - Open a folder in your computer that you want to add this app.
-- Open git (in step 2), then type:
+- Open git, then type:
 
 ```bash
 git clone https://github.com/Shu-Kei/gptbrycen.git
