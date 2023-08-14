@@ -59,7 +59,10 @@ flutter build apk
 ![video (1)](https://github.com/Shu-Kei/gptbrycen/assets/125178921/27796124-861e-4fdb-bd76-56f137733fa5)
 
   
-- 
+- 4.Create the following value variables in Cloud Firestore for use in the app.
+  
+![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/32f53fc1-1f76-4eed-8917-5c72331a0eaf)
+
 
 ### 2. Clone this github repository app
 
