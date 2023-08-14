@@ -101,6 +101,7 @@ flutterfire configure
 ```bash
 flutter pub add firebase_core
 ```
+
 2.From your Flutter project directory, run the following command to ensure that your Flutter app's Firebase configuration is up-to-date:
 
 ```bash
