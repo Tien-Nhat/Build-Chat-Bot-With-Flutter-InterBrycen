@@ -563,9 +563,6 @@ class _summarize extends State<summarize> {
       var docSnapshot1 = await collection.doc('memory').get();
       Map<String, dynamic> data1 = docSnapshot1.data()!;
 
-      // retrievalQA =
-      //     await readFile(file.path!, data1["APIKey"], data1["Content"]);
-
       EasyLoading.showProgress(0.3,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.3 * 100).toStringAsFixed(0)}%');
@@ -574,6 +571,7 @@ class _summarize extends State<summarize> {
         _checkconnect = false;
         _checkReload = false;
       });
+
       EasyLoading.showProgress(0.4,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.4 * 100).toStringAsFixed(0)}%');
@@ -582,15 +580,19 @@ class _summarize extends State<summarize> {
       EasyLoading.showProgress(0.6,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.6 * 100).toStringAsFixed(0)}%');
+
       print(sug);
+
       EasyLoading.showProgress(1,
           maskType: EasyLoadingMaskType.black,
           status: '${(1 * 100).toStringAsFixed(0)}%');
+
       FirebaseFirestore.instance.collection("chatSummarize").add({
         "text": sug,
         "createdAt": Timestamp.now(),
         "Indext": 3,
       });
+
       FirebaseFirestore.instance
           .collection("memory")
           .doc("memory")
@@ -599,6 +601,7 @@ class _summarize extends State<summarize> {
       setState(() {
         isLoading = false;
       });
+
       EasyLoading.dismiss();
     } catch (e) {
       EasyLoading.showError(e.toString());
