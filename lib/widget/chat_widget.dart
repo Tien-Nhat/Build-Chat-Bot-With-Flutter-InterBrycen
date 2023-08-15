@@ -271,10 +271,15 @@ class ChatWidget extends StatelessWidget {
       }
 
       final res = await retrievalQA(kq1);
-      FirebaseFirestore.instance
-          .collection("memory")
-          .doc("memory")
-          .update({"Document": res.toString()});
+
+      FirebaseFirestore.instance.collection("memory").doc("memory").update({
+        "Document": res.toString(),
+        "SummarizeHistory": data["SummarizeHistory"] +
+            "\nHuman: " +
+            kq1 +
+            "\nAI: " +
+            res["result"].toString()
+      });
       FirebaseFirestore.instance.collection("chatSummarize").add({
         "text": res["result"].toString(),
         "createdAt": Timestamp.now(),
@@ -290,8 +295,7 @@ class ChatWidget extends StatelessWidget {
         });
       } else {
         FirebaseFirestore.instance.collection("chatSummarize").add({
-          "text":
-              "Không tìm thấy câu trả lời lời trong nội dung, vui lòng hỏi câu khác.",
+          "text": e.toString(),
           "createdAt": Timestamp.now(),
           "Indext": 1,
         });

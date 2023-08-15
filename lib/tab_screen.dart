@@ -19,7 +19,7 @@ class _TabsScreenState extends State<TabsScreen> {
   String item = "chat";
   var _enteredAPI = "";
   final _form = GlobalKey<FormState>();
-  bool? _isAPI;
+  bool _isAPI = true;
   BuildContext? dcontext;
   dismissDailog() {
     if (dcontext != null) {
@@ -201,6 +201,10 @@ class _TabsScreenState extends State<TabsScreen> {
                         batch.delete(doc.reference);
                       }
                       await batch.commit();
+                      await FirebaseFirestore.instance
+                          .collection("memory")
+                          .doc("memory")
+                          .update({"SummarizeHistory": ""});
                     },
                     icon: const Icon(
                       Icons.delete,

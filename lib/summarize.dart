@@ -125,6 +125,22 @@ class _summarize extends State<summarize> {
     }
   }
 
+  String cutDialogue(String dialogue, {int maxLength = 2000}) {
+    if (dialogue.length <= maxLength) {
+      return dialogue;
+    } else {
+      // Tìm vị trí của ký tự xuống dòng gần nhất trước maxLength
+      int lastNewlineIndex =
+          dialogue.lastIndexOf("Human:", dialogue.length - maxLength);
+      if (lastNewlineIndex == -1) {
+        return dialogue.substring(0, maxLength);
+      } else {
+        // Cắt phần đầu chuỗi từ ký tự xuống dòng gần nhất
+        return dialogue.substring(lastNewlineIndex - 1);
+      }
+    }
+  }
+
   void _submitMessage() async {
     _isTyping = true;
     var collection = FirebaseFirestore.instance.collection('memory');
@@ -170,7 +186,18 @@ class _summarize extends State<summarize> {
         });
       }
 
-      final res = await retrievalQA(enteredMessage);
+      final res = await retrievalQA(
+          data["SummarizeHistory"] + "\nHuman: " + enteredMessage + "\nAI: ");
+      await FirebaseFirestore.instance
+          .collection("memory")
+          .doc("memory")
+          .update({
+        "SummarizeHistory": cutDialogue(data["SummarizeHistory"]) +
+            "\nHuman: " +
+            enteredMessage +
+            "\nAI: " +
+            res["result"].toString()
+      });
       FirebaseFirestore.instance
           .collection("memory")
           .doc("memory")
@@ -191,8 +218,7 @@ class _summarize extends State<summarize> {
         });
       } else {
         FirebaseFirestore.instance.collection("chatSummarize").add({
-          "text":
-              "Không tìm thấy câu trả lời lời trong nội dung, vui lòng hỏi câu khác.",
+          "text": e.toString(),
           "createdAt": Timestamp.now(),
           "Indext": 1,
         });
@@ -497,6 +523,10 @@ class _summarize extends State<summarize> {
 
   Future<void> uploadFile() async {
     try {
+      setState(() {
+        _checkconnect = false;
+        _checkReload = false;
+      });
       final result = await FilePicker.platform.pickFiles(withData: true);
       if (result == null) {
         return;
@@ -567,11 +597,6 @@ class _summarize extends State<summarize> {
       EasyLoading.showProgress(0.3,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.3 * 100).toStringAsFixed(0)}%');
-
-      setState(() {
-        _checkconnect = false;
-        _checkReload = false;
-      });
 
       EasyLoading.showProgress(0.4,
           maskType: EasyLoadingMaskType.black,
@@ -658,8 +683,6 @@ class _summarize extends State<summarize> {
         isLoading = true;
       });
 
-      retrievalQA =
-          await readFile(enteredMessage, data["APIKey"], data["Content"]);
       EasyLoading.showProgress(0.3,
           maskType: EasyLoadingMaskType.black,
           status: '${(0.3 * 100).toStringAsFixed(0)}%');
@@ -695,8 +718,10 @@ class _summarize extends State<summarize> {
       if (e.toString() == "[output_parser] No function message returned") {
         EasyLoading.showError(
             "Không thể tạo câu hỏi gợi ý, nhưng bạn vẫn có thể hỏi về nội dung file");
+      } else {
+        EasyLoading.showError(e.toString());
       }
-      EasyLoading.showError(e.toString());
+
       print(e.toString());
       setState(() {
         isLoading = false;
@@ -717,12 +742,12 @@ Khi tôi truy vấn: 'đưa ra 3 câu hỏi' \nVui lòng dựa vào đoạn văn
     List<String> urls = [];
     List<Document> documents = [];
     if (url.isNotEmpty) {
-      urls.clear();
-      urls.add(url);
       FirebaseFirestore.instance
           .collection("memory")
           .doc("memory")
           .update({"FilePath": url});
+      urls.clear();
+      urls.add(url);
 
       WebBaseLoader loader = WebBaseLoader(urls);
       documents = await loader.load();
