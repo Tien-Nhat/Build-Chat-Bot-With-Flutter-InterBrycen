@@ -134,7 +134,6 @@ You can download the APK file from the releases section of this repository or bu
 instructions below:
 
 ```bash
-git clone https://github.com/Shu-Kei/gptbrycen.git
 cd gptbrycen
 flutter build apk
 ````
