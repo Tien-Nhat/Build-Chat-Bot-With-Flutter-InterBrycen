@@ -145,6 +145,12 @@ Access the chatbot for interactive conversations.
 Switch to the "Summarize" screen to summarize content.
 Upload audio, text, or PDF files for quick summaries.
 
+
+https://github.com/Shu-Kei/gptbrycen/assets/125178921/aecc56d0-985c-4ded-b4e4-00f15597f604
+
+
+
+
 # Acknowledgements
 
 BrycenChat was built using the following open-source libraries and tools:
