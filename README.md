@@ -173,3 +173,5 @@ BrycenChat was built using the following open-source libraries and tools:
 * 13/08/2023: Successfully resolve the issue of excessively long text by segmenting the text into smaller parts for embedding by the model.
 
 * 14/08/2023: Refine the app, removing any redundant lines of code.
+
+* 15/08/2023: Continue fine-tuning, add the feature of remembering chat history for the summarization section.
