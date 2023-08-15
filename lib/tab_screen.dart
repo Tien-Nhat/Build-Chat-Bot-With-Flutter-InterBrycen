@@ -19,7 +19,7 @@ class _TabsScreenState extends State<TabsScreen> {
   String item = "chat";
   var _enteredAPI = "";
   final _form = GlobalKey<FormState>();
-  bool _isAPI = true;
+  bool _isAPI = false;
   BuildContext? dcontext;
   dismissDailog() {
     if (dcontext != null) {
@@ -41,6 +41,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
   Future<void> _submit() async {
     final isValid = _form.currentState!.validate();
+    print(isValid);
     if (isValid) {
       _form.currentState!.save();
     }
@@ -49,6 +50,7 @@ class _TabsScreenState extends State<TabsScreen> {
     if (_isAPI == true) {
       dismissDailog();
       collection.doc("memory").update({"APIKey": _enteredAPI});
+      _isAPI = false;
     }
   }
 
@@ -276,6 +278,7 @@ class _TabsScreenState extends State<TabsScreen> {
                     setState(() => _isAPI = check);
                   },
                   validator: (value) {
+                    print(value);
                     if (value == null || value.trim().isEmpty) {
                       return "Không được để trống API key.";
                     }
@@ -283,7 +286,8 @@ class _TabsScreenState extends State<TabsScreen> {
                     if (value.trim().length != 51) {
                       return "Độ dài API Key không hợp lệ.";
                     }
-                    if (!_isAPI!) {
+
+                    if (!_isAPI) {
                       return "API Key không tồn tại.";
                     }
                     return null;
