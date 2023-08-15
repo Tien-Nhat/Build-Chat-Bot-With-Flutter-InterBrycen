@@ -100,7 +100,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  String cutDialogue(String dialogue, {int maxLength = 9000}) {
+  String cutDialogue(String dialogue, {int maxLength = 14000}) {
     if (dialogue.length <= maxLength) {
       return dialogue;
     } else {
@@ -148,7 +148,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       OpenAIChatCompletionModel chatCompletion =
           await OpenAI.instance.chat.create(
-        model: "gpt-3.5-turbo",
+        model: "gpt-3.5-turbo-16k",
         messages: [
           OpenAIChatCompletionChoiceMessageModel(
             content: data["History"] + "\nHuman: " + enteredMessage + "\nAI:",

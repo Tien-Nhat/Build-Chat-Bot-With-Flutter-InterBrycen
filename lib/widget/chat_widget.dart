@@ -344,7 +344,7 @@ class ChatWidget extends StatelessWidget {
 
     final llm = ChatOpenAI(
       apiKey: API,
-      model: 'gpt-3.5-turbo-0613',
+      model: 'gpt-3.5-turbo-16k',
       temperature: 0.7,
     );
 
