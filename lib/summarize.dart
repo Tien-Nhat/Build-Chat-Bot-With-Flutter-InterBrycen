@@ -169,6 +169,7 @@ class _summarize extends State<summarize> {
       "createdAt": Timestamp.now(),
       "Indext": 0,
     });
+    print(_checkReload);
     try {
       if (_checkReload || data["APIKey"] != data["OldAPIKey"]) {
         await FirebaseFirestore.instance
@@ -523,10 +524,6 @@ class _summarize extends State<summarize> {
 
   Future<void> uploadFile() async {
     try {
-      setState(() {
-        _checkconnect = false;
-        _checkReload = false;
-      });
       final result = await FilePicker.platform.pickFiles(withData: true);
       if (result == null) {
         return;
@@ -541,7 +538,10 @@ class _summarize extends State<summarize> {
       PlatformFile file = result.files.first;
 
       final TypePath = lookupMimeType(file.path!);
-
+      setState(() {
+        _checkconnect = false;
+        _checkReload = true;
+      });
       var collection = FirebaseFirestore.instance.collection('memory');
       var docSnapshot = await collection.doc('memory').get();
       Map<String, dynamic> data = docSnapshot.data()!;
@@ -688,7 +688,7 @@ class _summarize extends State<summarize> {
           status: '${(0.3 * 100).toStringAsFixed(0)}%');
       setState(() {
         _checkconnect = false;
-        _checkReload = false;
+        _checkReload = true;
       });
       final sug =
           await getSuggest(data["Content"], data["APIKey"], enteredMessage);
