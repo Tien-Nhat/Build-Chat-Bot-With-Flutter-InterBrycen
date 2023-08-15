@@ -135,7 +135,8 @@ You can download the APK file from the releases section of this repository or bu
 ```bash
 flutter build apk
 ````
-Your APK file will have in build\app\outputs\apk\release in project
+
+Your APK file will have in ```build\app\outputs\apk\release``` in project
 
 # Usage
 
