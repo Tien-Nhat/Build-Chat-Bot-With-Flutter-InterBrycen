@@ -35,16 +35,7 @@
 
 # HOW TO RUN THIS APP 
 
-## If you want to use the APK to install on your phone, please run the following command:
 
-You can download the APK file from the releases section of this repository or build the app from source using the
-instructions below:
-
-```bash
-git clone https://github.com/Shu-Kei/gptbrycen.git
-cd gptbrycen
-flutter build apk
-````
 ## If you want to run the project, please follow the steps below:
 
 ### 1. Firebase setup
@@ -136,6 +127,17 @@ flutter pub add cloud_firestore
 ```bash
 flutterfire configure
 ```
+
+## If you want to use the APK to install on your phone, please run the following command:
+
+You can download the APK file from the releases section of this repository or build the app from source using the
+instructions below:
+
+```bash
+git clone https://github.com/Shu-Kei/gptbrycen.git
+cd gptbrycen
+flutter build apk
+````
 
 # Usage
 
