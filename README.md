@@ -130,11 +130,9 @@ flutterfire configure
 
 ## If you want to use the APK to install on your phone, please run the following command:
 
-You can download the APK file from the releases section of this repository or build the app from source using the
-instructions below:
+You can download the APK file from the releases section of this repository or build the app from source, open your project terminal, then type:
 
 ```bash
-cd gptbrycen
 flutter build apk
 ````
 
