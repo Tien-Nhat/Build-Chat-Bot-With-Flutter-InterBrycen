@@ -35,16 +35,7 @@
 
 # HOW TO RUN THIS APP 
 
-## If you want to use the APK to install on your phone, please run the following command:
 
-You can download the APK file from the releases section of this repository or build the app from source using the
-instructions below:
-
-```bash
-git clone https://github.com/Shu-Kei/gptbrycen.git
-cd gptbrycen
-flutter build apk
-````
 ## If you want to run the project, please follow the steps below:
 
 ### 1. Firebase setup
@@ -65,7 +56,8 @@ flutter build apk
 
 - 5.Create the following value variables in Cloud Firestore for use in the app.
   
-![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/e444b7f9-970e-45c7-a69c-90b9da3061ba)
+![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/5af92bf7-fc60-4adf-8461-2304f243bc07)
+
 
 
 
@@ -136,6 +128,15 @@ flutter pub add cloud_firestore
 flutterfire configure
 ```
 
+## If you want to use the APK to install on your phone, please run the following command:
+
+You can download the APK file from the releases section of this repository or build the app from source, open your project terminal, then type:
+
+```bash
+flutter build apk
+````
+Your APK file will have in build\app\outputs\apk\release in project
+
 # Usage
 
 Enter your ChatGPT API key to log in to the Chat Screen.
@@ -172,3 +173,5 @@ BrycenChat was built using the following open-source libraries and tools:
 * 13/08/2023: Successfully resolve the issue of excessively long text by segmenting the text into smaller parts for embedding by the model.
 
 * 14/08/2023: Refine the app, removing any redundant lines of code.
+
+* 15/08/2023: Continue fine-tuning, add the feature of remembering chat history for the summarization section.
