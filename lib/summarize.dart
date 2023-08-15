@@ -515,6 +515,7 @@ class _summarize extends State<summarize> {
       var collection = FirebaseFirestore.instance.collection('memory');
       var docSnapshot = await collection.doc('memory').get();
       Map<String, dynamic> data = docSnapshot.data()!;
+      dartOpenAI.OpenAI.apiKey = data["APIKey"];
 
       await FirebaseFirestore.instance
           .collection("memory")
@@ -691,7 +692,12 @@ class _summarize extends State<summarize> {
       });
       EasyLoading.dismiss();
     } catch (e) {
+      if (e.toString() == "[output_parser] No function message returned") {
+        EasyLoading.showError(
+            "Không thể tạo câu hỏi gợi ý, nhưng bạn vẫn có thể hỏi về nội dung file");
+      }
       EasyLoading.showError(e.toString());
+      print(e.toString());
       setState(() {
         isLoading = false;
       });
@@ -749,7 +755,8 @@ Khi tôi truy vấn: 'đưa ra 3 câu hỏi' \nVui lòng dựa vào đoạn văn
 
     final llm = ChatOpenAI(
       apiKey: apiKey,
-      model: 'gpt-3.5-turbo-0613',
+      model: 'gpt-3.5-turbo-16k',
+      maxTokens: 4000,
       temperature: 0.0,
     );
 
