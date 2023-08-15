@@ -9,7 +9,6 @@ import 'package:langchain_openai/langchain_openai.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:flutter_langdetect/flutter_langdetect.dart' as langdetect;
 import 'package:collection/collection.dart';
-import 'package:mime/mime.dart';
 
 late RetrievalQAChain retrievalQA;
 bool _isSpeaking = false;
