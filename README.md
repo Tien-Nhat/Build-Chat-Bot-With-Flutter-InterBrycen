@@ -132,7 +132,7 @@ flutterfire configure
 
 You can download the APK file from the releases section of this repository or build the app from source, open your project terminal, then type:
 
-```bash
+```python
 flutter build apk
 ````
 
