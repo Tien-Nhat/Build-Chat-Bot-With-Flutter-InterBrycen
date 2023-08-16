@@ -169,7 +169,7 @@ class _summarize extends State<summarize> {
       "createdAt": Timestamp.now(),
       "Indext": 0,
     });
-    print(_checkReload);
+
     try {
       if (_checkReload || data["APIKey"] != data["OldAPIKey"]) {
         await FirebaseFirestore.instance
@@ -445,7 +445,6 @@ class _summarize extends State<summarize> {
       documents.add(
           Document(pageContent: content, metadata: const {"source": "local"}));
     } else {
-      print("đây là Path");
       URLs.clear();
       URLs.add(Path);
 

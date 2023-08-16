@@ -91,7 +91,7 @@ class _home_screen extends State<home_screen> {
                             textCapitalization: TextCapitalization.none,
                             onChanged: (value) async {
                               final check = await checkApiKey(value);
-                              print(check);
+
                               setState(() => _isAPI = check);
                             },
                             validator: (value) {

@@ -41,7 +41,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
   Future<void> _submit() async {
     final isValid = _form.currentState!.validate();
-    print(isValid);
+
     if (isValid) {
       _form.currentState!.save();
     }
@@ -278,7 +278,6 @@ class _TabsScreenState extends State<TabsScreen> {
                     setState(() => _isAPI = check);
                   },
                   validator: (value) {
-                    print(value);
                     if (value == null || value.trim().isEmpty) {
                       return "Không được để trống API key.";
                     }
