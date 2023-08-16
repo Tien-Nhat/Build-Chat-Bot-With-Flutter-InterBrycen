@@ -213,7 +213,7 @@ class _summarize extends State<summarize> {
     } catch (e) {
       if (e.toString().endsWith("statusCode: 429}")) {
         FirebaseFirestore.instance.collection("chatSummarize").add({
-          "text": e.toString(),
+          "text": "Tin nhắn bị giới hạn vui lòng đợi vài phút để nhắn tiếp",
           "createdAt": Timestamp.now(),
           "Indext": 1,
         });
