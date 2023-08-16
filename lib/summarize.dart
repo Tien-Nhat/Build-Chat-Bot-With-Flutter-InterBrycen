@@ -663,10 +663,6 @@ class _summarize extends State<summarize> {
     var docSnapshot = await collection.doc('memory').get();
     Map<String, dynamic> data = docSnapshot.data()!;
 
-    EasyLoading.showProgress(0,
-        maskType: EasyLoadingMaskType.black,
-        status: '${(0 * 100).toStringAsFixed(0)}%');
-
     FirebaseFirestore.instance
         .collection("memory")
         .doc("memory")
