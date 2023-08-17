@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/src/url_launcher_uri.dart' as url_launcher;
 
 class home_screen extends StatefulWidget {
   const home_screen({super.key});
@@ -102,7 +103,7 @@ class _home_screen extends State<home_screen> {
                               if (value.trim().length != 51) {
                                 return "Độ dài API Key không hợp lệ.";
                               }
-                              if (!_isAPI!) {
+                              if (!_isAPI) {
                                 return "API Key không tồn tại.";
                               }
                               return null;
@@ -120,7 +121,14 @@ class _home_screen extends State<home_screen> {
                                   .primaryContainer,
                             ),
                             child: const Text("Sumbit"),
-                          )
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                url_launcher.launchUrl(Uri.parse(
+                                    "https://platform.openai.com/account/api-keys"));
+                              },
+                              child: const Text(
+                                  "Bạn chưa có API Key hãy nhấn vào đây."))
                         ],
                       ),
                     ),

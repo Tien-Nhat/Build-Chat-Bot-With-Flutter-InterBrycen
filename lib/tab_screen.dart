@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:gptbrycen/chat_screen.dart';
 import 'package:gptbrycen/summarize.dart';
+import 'package:url_launcher/src/url_launcher_uri.dart' as url_launcher;
 
 import 'package:http/http.dart' as http;
 
@@ -16,6 +17,7 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   final _advancedDrawerController = AdvancedDrawerController();
+  final _apiController = TextEditingController();
   String item = "chat";
   var _enteredAPI = "";
   final _form = GlobalKey<FormState>();
@@ -50,6 +52,7 @@ class _TabsScreenState extends State<TabsScreen> {
     if (_isAPI == true) {
       dismissDailog();
       collection.doc("memory").update({"APIKey": _enteredAPI});
+      _apiController.clear();
       _isAPI = false;
     }
   }
@@ -262,6 +265,7 @@ class _TabsScreenState extends State<TabsScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextFormField(
+                  controller: _apiController,
                   cursorColor: Colors.blueAccent,
                   autocorrect: false,
                   textCapitalization: TextCapitalization.none,
@@ -302,7 +306,13 @@ class _TabsScreenState extends State<TabsScreen> {
                         Theme.of(context).colorScheme.primaryContainer,
                   ),
                   child: const Text("Sumbit"),
-                )
+                ),
+                TextButton(
+                    onPressed: () {
+                      url_launcher.launchUrl(Uri.parse(
+                          "https://platform.openai.com/account/api-keys"));
+                    },
+                    child: const Text("Bạn chưa có API Key hãy nhấn vào đây."))
               ],
             ),
           ),
