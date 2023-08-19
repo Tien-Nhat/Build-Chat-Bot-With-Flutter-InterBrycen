@@ -125,22 +125,6 @@ class _summarize extends State<summarize> {
     }
   }
 
-  String cutDialogue(String dialogue, {int maxLength = 2000}) {
-    if (dialogue.length <= maxLength) {
-      return dialogue;
-    } else {
-      // Tìm vị trí của ký tự xuống dòng gần nhất trước maxLength
-      int lastNewlineIndex =
-          dialogue.lastIndexOf("Human:", dialogue.length - maxLength);
-      if (lastNewlineIndex == -1) {
-        return dialogue.substring(0, maxLength);
-      } else {
-        // Cắt phần đầu chuỗi từ ký tự xuống dòng gần nhất
-        return dialogue.substring(lastNewlineIndex - 1);
-      }
-    }
-  }
-
   void _submitMessage() async {
     _isTyping = true;
     var collection = FirebaseFirestore.instance.collection('memory');
@@ -187,18 +171,8 @@ class _summarize extends State<summarize> {
         });
       }
 
-      final res = await retrievalQA(
-          data["SummarizeHistory"] + "\nHuman: " + enteredMessage + "\nAI: ");
-      await FirebaseFirestore.instance
-          .collection("memory")
-          .doc("memory")
-          .update({
-        "SummarizeHistory": cutDialogue(data["SummarizeHistory"]) +
-            "\nHuman: " +
-            enteredMessage +
-            "\nAI: " +
-            res["result"].toString()
-      });
+      final res = await retrievalQA(enteredMessage);
+
       FirebaseFirestore.instance
           .collection("memory")
           .doc("memory")
@@ -481,7 +455,7 @@ class _summarize extends State<summarize> {
 
     final qaChain = OpenAIQAWithSourcesChain(llm: llm);
     final docPrompt = PromptTemplate.fromTemplate(
-      'content: {page_content}',
+      'Làm ơn dựa vào nội dung tài liệu sau để trả lời câu hỏi của tôi: {page_content}',
     );
     final finalQAChain = StuffDocumentsChain(
       llmChain: qaChain,
