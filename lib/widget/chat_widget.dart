@@ -20,6 +20,11 @@ class ChatWidget extends StatelessWidget {
   final String msg;
   FlutterTts flutterTts = FlutterTts();
   final int chatIndext;
+  Map<String, String> myMap = {
+    'locale': 'vi-VN',
+    'name': 'vi-vn-x-vic-network',
+    // Thêm các cặp key-value khác tại đây
+  };
 
   void _speak() async {
     _isSpeaking = !_isSpeaking;
@@ -27,6 +32,7 @@ class ChatWidget extends StatelessWidget {
       await langdetect.initLangDetect();
       var language = langdetect.detect(msg);
       await flutterTts.setLanguage(language);
+      if (language == "vi") await flutterTts.setVoice(myMap);
       await flutterTts.speak(msg);
     } else {
       flutterTts.stop();
@@ -271,14 +277,6 @@ class ChatWidget extends StatelessWidget {
 
       final res = await retrievalQA(kq1);
 
-      FirebaseFirestore.instance.collection("memory").doc("memory").update({
-        "Document": res.toString(),
-        "SummarizeHistory": data["SummarizeHistory"] +
-            "\nHuman: " +
-            kq1 +
-            "\nAI: " +
-            res["result"].toString()
-      });
       FirebaseFirestore.instance.collection("chatSummarize").add({
         "text": res["result"].toString(),
         "createdAt": Timestamp.now(),
