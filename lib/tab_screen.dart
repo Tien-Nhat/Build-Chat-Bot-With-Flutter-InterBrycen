@@ -206,10 +206,6 @@ class _TabsScreenState extends State<TabsScreen> {
                         batch.delete(doc.reference);
                       }
                       await batch.commit();
-                      await FirebaseFirestore.instance
-                          .collection("memory")
-                          .doc("memory")
-                          .update({"SummarizeHistory": ""});
                     },
                     icon: const Icon(
                       Icons.delete,
