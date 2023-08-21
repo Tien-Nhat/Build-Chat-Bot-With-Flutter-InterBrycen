@@ -56,7 +56,8 @@
 
 - 5.Create the following value variables in Cloud Firestore for use in the app.
   
-![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/5af92bf7-fc60-4adf-8461-2304f243bc07)
+![image](https://github.com/Shu-Kei/gptbrycen/assets/125178921/ce4982c0-f47d-4d75-a935-ca21b7962f7b)
+
 
 
 
