@@ -93,6 +93,7 @@ npm install -g firebase-tools
 2. Log into Firebase using your Google account by running the following command:
 
 ```bash
+firebase logout
 firebase login
 ```
 
