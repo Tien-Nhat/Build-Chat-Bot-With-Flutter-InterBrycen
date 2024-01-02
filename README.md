@@ -14,7 +14,7 @@
   </div>
 </div>
 
-## Features
+## Features 
 
 * Chat with AI: Enjoy dynamic conversations with our AI chatbot, with Speech-to-Text and Text-to-Speech features.
 * Summarize Content: Extract key information from audio, text, PDF files effortlessly and Especially capable of reading the content of electronic news pages with URL page.
